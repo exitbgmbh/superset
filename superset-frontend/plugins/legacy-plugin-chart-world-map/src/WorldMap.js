@@ -26,6 +26,7 @@ import {
 } from '@superset-ui/core';
 import Datamap from 'datamaps/dist/datamaps.world.min';
 import { ColorBy } from './utils';
+import getCountryISO2 from 'country-iso-3-to-2'
 
 const propTypes = {
   data: PropTypes.arrayOf(
@@ -122,11 +123,13 @@ function WorldMap(element, props) {
       return undefined;
     }
 
+    const cca2Key = getCountryISO2(key)
+
     let values;
-    if (selected.includes(key)) {
+    if (selected.includes(cca2Key)) {
       values = [];
     } else {
-      values = [country];
+      values = [cca2Key];
     }
 
     return {
@@ -144,10 +147,10 @@ function WorldMap(element, props) {
         },
         filterState: {
           value: values.length ? values : null,
-          selectedValues: values.length ? [key] : null,
+          selectedValues: values.length ? [cca2Key] : null,
         },
       },
-      isCurrentValueSelected: selected.includes(key),
+      isCurrentValueSelected: selected.includes(cca2Key),
     };
   };
 
@@ -161,6 +164,7 @@ function WorldMap(element, props) {
 
     const dataMask = getCrossFilterDataMask(source)?.dataMask;
     if (dataMask) {
+      console.log('foobar', dataMask)
       setDataMask(dataMask);
     }
   };

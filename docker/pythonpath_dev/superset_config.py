@@ -72,6 +72,11 @@ CACHE_CONFIG = {
 }
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
+LANGUAGES = {
+    "de": {"flag": "de", "name": "Deutsch"},
+    "en": {"flag": "us", "name": "English"},
+}
+BABEL_DEFAULT_LOCALE = "de"
 
 class CeleryConfig:
     broker_url = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
@@ -104,6 +109,7 @@ WEBDRIVER_BASEURL = "http://superset:8088/"  # When using docker compose baseurl
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
 SQLLAB_CTAS_NO_LIMIT = True
+SUPERSET_LOAD_EXAMPLES = False
 
 log_level_text = os.getenv("SUPERSET_LOG_LEVEL", "INFO")
 LOG_LEVEL = getattr(logging, log_level_text.upper(), logging.INFO)

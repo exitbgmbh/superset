@@ -55,6 +55,8 @@ else
   echo "Skipping local overrides"
 fi
 
+export SUPERSET_LOAD_EXAMPLE=no
+
 case "${1}" in
   worker)
     echo "Starting Celery worker..."
